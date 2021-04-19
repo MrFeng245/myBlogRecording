@@ -168,7 +168,7 @@ void NextElem(SqList *L, ElemType cur_e, ElemType *next_e)
 void ListInsert(SqList *L, int i, ElemType e) 
 {
 	if(L->length <= 0)
-		return 0;
+		return;
 	int j;
 	for(j = L->length; j >= i; j++)		//将第i个元素之后的元素后移
 		L->data[j] = L->data[j-1];		//L是一个结构体指针，因此使用 -> 访问变量
