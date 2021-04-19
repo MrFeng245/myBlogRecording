@@ -1,5 +1,5 @@
 /*
----------------------【线性表】双链表------------------------
+---------------------【线性表】双链表-----------------------
 
 涉及操作：
     -定义
@@ -20,7 +20,8 @@
 
 -----------------使用方法：#include"文件名.c" 即可调用函数---------------
 */
-
+#include<malloc.h>
+#define ElemType int
 //定义
 typedef struct DNode
 {
@@ -179,10 +180,10 @@ int ListInsert(DLinklist L, int i, ElemType e)
 {
 	if(i < 1)
 		return 0;
-	DNode *p;       
-	int j = 0;      
-	p = L;          
-	while(p != NULL && j < i-1) 	
+	DNode *p;
+	int j = 0;
+	p = L;
+	while(p != NULL && j < i-1)
     {
 		p = p->next;
 		j++;
@@ -203,7 +204,7 @@ int ListInsert(DLinklist L, int i, ElemType e)
 初始条件：线性表L已存在
 操作条件：在p之前插入结点s，结点p的值域为e，L的长度加一
 */
-int InsertPriorNode(LinkList L, DNode *p, ElemType e)
+int InsertPriorNode(DLinklist L, DNode *p, ElemType e)
 {
 	if(p == NULL)
 		return 0;
@@ -246,16 +247,16 @@ int InsertNextNode(DNode *L, DNode *p, DNode *s)
 int DeleteNode(DNode *L, DNode *p)
 {
 	if(p == NULL)
-		return ERROR;
+		return 0;
 	DNode *q = p->next;
 	if(q == NULL)
-		return ERROR;
+		return 0;
 	p->next = q->next;
 	if(q->next != NULL)
 		q->next->prior = p;
 	free(q);
 	L->data--;
-	return OK;
+	return 1;
 }
 
 /*
@@ -273,7 +274,7 @@ int DeleteNode(DNode *L, DNode *p)
 //定义同双链表
 
 //初始化
-DLinklist InitList(DLinklist L)
+DLinklist CInitList(DLinklist L)
 {
 	L = (DNode *)malloc(sizeof(DNode));
 	if(L == NULL)
@@ -285,36 +286,36 @@ DLinklist InitList(DLinklist L)
 }
 
 //判空
-int Empty(DLinklist L)
+int IsEmpty(DLinklist L)
 {
 	if(L->next == L)
-		return OK;
-	return ERROR;
+		return 1;
+	return 0;
 }
 
 //插入
 int InsertNextDNode(DNode *L, DNode *p, DNode *s)
 {
 	if(L == NULL || p == NULL || s == NULL)
-		return ERROR;
+		return 0;
 	s->next = p->next;
 	p->next->prior = s;
 	s->prior = p;
 	p->next = s;
 	L->data++;
-	return OK;
+	return 1;
 }
 
 //删除p的后继q
 int DeleteNextDNode(DNode *L, DNode *p, DNode *q)
 {
 	if(L == NULL || p == NULL || q == NULL)
-		return ERROR;
+		return 0;
 	p->next = q->next;
 	q->next->prior = p;
 	free(q);
 	L->data--;
-	return OK;
+	return 1;
 }
 
 /*
