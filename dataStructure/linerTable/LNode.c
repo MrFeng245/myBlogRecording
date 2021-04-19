@@ -70,7 +70,7 @@ int ListInsert(LinkList L, int i, ElemType e)
 	int j = 1;
 	LNode *p;
 	p = L;
-	if(p && j < i-OK)
+	if(p && j < i-1)
 	{
 		p = p->next;
 		j++;
@@ -413,7 +413,7 @@ int ListTraverse(LinkList L)
 //定义同单链表
 
 //初始化
-LinkList InitList(LinkList L)
+LinkList CInitList(LinkList L)
 {
 	L = (LNode *)malloc(sizeof(LNode));
 	if(L == NULL)
@@ -429,7 +429,7 @@ LinkList InitList(LinkList L)
 操作条件：若L为空表，则返回1，否则返回0
 注：如果里面有脏数据，其结果也是非空
 */
-int Empty(LinkList L)
+int CEmpty(LinkList L)
 {
 	if(L->next == L)
 		return 1;
